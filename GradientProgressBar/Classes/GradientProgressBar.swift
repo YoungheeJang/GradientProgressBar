@@ -50,6 +50,14 @@ open class GradientProgressBar: UIView {
         set { maskLayerViewModel.timingFunction = newValue }
     }
 
+    /// set cornerRadius for the view and maskView
+    public var cornerRadius: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+            clipsToBounds = true
+        }
+    }
+    
     /// Layer containing the gradient.
     public let gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -139,7 +147,8 @@ open class GradientProgressBar: UIView {
         CATransaction.setAnimationTimingFunction(timingFunction)
 
         maskLayer.frame = frame
-
+        maskLayer.cornerRadius = cornerRadius
+        
         CATransaction.commit()
     }
 }
